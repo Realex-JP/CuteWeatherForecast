@@ -28,7 +28,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         add(weatherLabel, gbc);
 
         setPreferredSize(new Dimension(300, 150));
-        setBackground(new Color(135, 206, 250)); // Light blue background
+        setBackground(new Color(135, 206, 250));
 
         startThread();
     }
@@ -47,7 +47,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
             updateWeatherInfo();
 
             try {
-                Thread.sleep(3600000); // 1 hour
+                Thread.sleep(Config.updateTime); // 1 hour
                 updateWeatherInfo();
                 repaint();
             } catch (InterruptedException e) {
@@ -57,8 +57,6 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
     }
 
     private void getWeatherInfo() {
-        // Fetch weather data from a weather API or another source
-        // For demonstration, we will use dummy data
         String temperature = "25°C";
         String humidity = "60%";
         String weather = "Sunny";
@@ -69,14 +67,12 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
     }
 
     private void updateWeatherInfo() {
-        // Update the weather information on the labels
-        // Here, it is redundant because getWeatherInfo already updates the labels
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // You can add custom painting code here if needed
     }
 
     public static void main(String[] args) {
