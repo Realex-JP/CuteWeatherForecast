@@ -1,7 +1,7 @@
 package CuteWeatherForecast;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class CuteWeatherForecast extends JPanel implements Runnable {
 
@@ -9,6 +9,10 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
     private JLabel temperatureLabel;
     private JLabel humidityLabel;
     private JLabel weatherLabel;
+
+    private JButton setTokyo;
+    private JButton setParis;
+    private JButton setNewYork;
 
     public CuteWeatherForecast() {
         setLayout(new GridBagLayout());
@@ -21,14 +25,32 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         humidityLabel = new JLabel("Humidity: ");
         weatherLabel = new JLabel("Weather: ");
 
+        setTokyo = new JButton("Tokyo");
+        setTokyo.setFont(Config.setButtonFont);
+        setParis = new JButton("Paris");
+        setParis.setFont(Config.setButtonFont);
+        setNewYork = new JButton("NewYork");
+        setNewYork.setFont(Config.setButtonFont);
+
         add(temperatureLabel, gbc);
         gbc.gridy++;
         add(humidityLabel, gbc);
         gbc.gridy++;
         add(weatherLabel, gbc);
+        gbc.gridy++;
 
-        setPreferredSize(new Dimension(300, 150));
-        setBackground(new Color(135, 206, 250));
+        gbc.gridy++;
+        gbc.gridwidth = 3;
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Config.themeColor);
+        buttonPanel.add(setTokyo);
+        buttonPanel.add(setParis);
+        buttonPanel.add(setNewYork);
+
+        add(buttonPanel, gbc);
+
+        setPreferredSize(new Dimension(600, 600));
+        setBackground(Config.themeColor);
 
         startThread();
     }
@@ -47,7 +69,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
             updateWeatherInfo();
 
             try {
-                Thread.sleep(Config.updateTime); // 1 hour
+                Thread.sleep(Config.updateTime);
                 updateWeatherInfo();
                 repaint();
             } catch (InterruptedException e) {
