@@ -8,5 +8,5 @@ public final class Config {
 
     final static Color themeColor = new Color(0xC8C4FF);
 
-    final static Font setButtonFont = new Font("Arial", Font.ITALIC, 18);
+    final static Font setButtonFont = new Font("Bauhaus 93", Font.BOLD, 18);
 }
