@@ -1,6 +1,7 @@
 package CuteWeatherForecast;
 
 import java.awt.*;
+import java.util.*;
 import javax.swing.*;
 
 import static CuteWeatherForecast.Config.*;
@@ -37,16 +38,25 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         gbc.gridy++;
 
         add(weatherInfoPanel, BorderLayout.CENTER);
+        weatherInfoPanel.setBackground(themeColor);
 
         setTokyo = new JButton("Tokyo");
-        setTokyo.setFont(Config.setButtonFont);
+        setTokyo.setFont(setButtonFont);
+        setTokyo.setBorderPainted(false);
+        setTokyo.setContentAreaFilled(false);
+
         setParis = new JButton("Paris");
-        setParis.setFont(Config.setButtonFont);
+        setParis.setFont(setButtonFont);
+        setParis.setBorderPainted(false);
+        setParis.setContentAreaFilled(false);
+
         setNewYork = new JButton("NewYork");
         setNewYork.setFont(Config.setButtonFont);
+        setNewYork.setBorderPainted(false);
+        setNewYork.setContentAreaFilled(false);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBackground(themeColor);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 5));
+        buttonPanel.setBackground(menuColor);
 
         buttonPanel.add(setTokyo);
         buttonPanel.add(setParis);
@@ -91,6 +101,27 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         temperatureLabel.setText("Temperature: " + temperature);
         humidityLabel.setText("Humidity: " + humidity);
         weatherLabel.setText("Weather: " + weather);
+        
+        ImageIcon icon = null;
+        switch (weather) {
+            case "Sunny":
+                icon = sunny;
+                break;
+            case "Cloudy":
+                icon = cloudy;
+                break;
+            case "Rainy":
+                icon = rainy;
+                break;
+            case "Snowy":
+                icon = snowy;
+                break;
+        }
+        if (icon != null) {
+            weatherLabel.setIcon(icon);
+        } else {
+            System.out.println("No icon found for weather: " + weather);
+        }
     }
 
     private void updateWeatherInfo() {
