@@ -3,6 +3,8 @@ package CuteWeatherForecast;
 import java.awt.*;
 import javax.swing.*;
 
+import static CuteWeatherForecast.Config.*;
+
 public class CuteWeatherForecast extends JPanel implements Runnable {
 
     Thread fThread;
@@ -15,7 +17,9 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
     private JButton setNewYork;
 
     public CuteWeatherForecast() {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+
+        JPanel weatherInfoPanel = new JPanel(new GridLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -25,6 +29,15 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         humidityLabel = new JLabel("Humidity: ");
         weatherLabel = new JLabel("Weather: ");
 
+        weatherInfoPanel.add(temperatureLabel, gbc);
+        gbc.gridy++;
+        weatherInfoPanel.add(humidityLabel, gbc);
+        gbc.gridy++;
+        weatherInfoPanel.add(weatherLabel, gbc);
+        gbc.gridy++;
+
+        add(weatherInfoPanel, BorderLayout.CENTER);
+
         setTokyo = new JButton("Tokyo");
         setTokyo.setFont(Config.setButtonFont);
         setParis = new JButton("Paris");
@@ -32,25 +45,17 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         setNewYork = new JButton("NewYork");
         setNewYork.setFont(Config.setButtonFont);
 
-        add(temperatureLabel, gbc);
-        gbc.gridy++;
-        add(humidityLabel, gbc);
-        gbc.gridy++;
-        add(weatherLabel, gbc);
-        gbc.gridy++;
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBackground(themeColor);
 
-        gbc.gridy++;
-        gbc.gridwidth = 3;
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.setBackground(Config.themeColor);
         buttonPanel.add(setTokyo);
         buttonPanel.add(setParis);
         buttonPanel.add(setNewYork);
 
-        add(buttonPanel, gbc);
+        add(buttonPanel, BorderLayout.NORTH);
 
-        setPreferredSize(new Dimension(600, 600));
-        setBackground(Config.themeColor);
+        setPreferredSize(dim);
+        setBackground(themeColor);
 
         startThread();
     }
@@ -69,7 +74,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
             updateWeatherInfo();
 
             try {
-                Thread.sleep(Config.updateTime);
+                Thread.sleep(updateTime);
                 updateWeatherInfo();
                 repaint();
             } catch (InterruptedException e) {
