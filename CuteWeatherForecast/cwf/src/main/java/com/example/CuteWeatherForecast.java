@@ -124,7 +124,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
 
     private void updateWeatherInfo(String city) {
         try {
-            String apiKey = "83719ed25335223ceba0fb2b680d4076";
+            String apiKey = "";
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&units=metric&appid=" + apiKey;
 
             URL url = new URL(apiUrl);
