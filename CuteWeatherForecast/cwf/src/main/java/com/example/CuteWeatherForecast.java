@@ -108,7 +108,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         setOther.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String city = JOptionPane.showInputDialog(null, "Enter city name:", "Other City", JOptionPane.PLAIN_MESSAGE);
+                String city = JOptionPane.showInputDialog(null, "都市名をアルファベットで入力してください（例：Sydney）", "他の都市を選択", JOptionPane.PLAIN_MESSAGE);
                 if (city != null && !city.isEmpty()) {
                     updateWeatherInfo(city);
                 }
