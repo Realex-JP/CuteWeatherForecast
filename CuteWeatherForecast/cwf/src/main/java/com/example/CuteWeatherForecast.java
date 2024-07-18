@@ -1,12 +1,9 @@
 package com.example;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import javax.swing.*;
 import org.json.JSONObject;
 
@@ -15,13 +12,9 @@ import static com.example.Config.*;
 public class CuteWeatherForecast extends JPanel implements Runnable {
 
     Thread fThread;
-    private JLabel temperatureLabel;
-    private JLabel humidityLabel;
-    private JLabel weatherLabel;
+    private JLabel temperatureLabel, weatherLabel, humidityLabel, locationLabel;
 
-    private JButton setTokyo;
-    private JButton setParis;
-    private JButton setLondon;
+    private JButton setTokyo, setParis, setLondon, setOther;
 
     private Image bgImg;
 
@@ -54,6 +47,9 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         weatherInfoPanel.setBackground(themeColor);
         add(weatherInfoPanel, BorderLayout.CENTER);
 
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 60, 5));
+        buttonPanel.setBackground(themeColor);
+
         setTokyo = new JButton("Tokyo");
         setTokyo.setFont(subFont);
         setTokyo.setBorderPainted(false);
@@ -69,14 +65,22 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         setLondon.setBorderPainted(false);
         setLondon.setContentAreaFilled(false);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 5));
-        buttonPanel.setBackground(themeColor);
+        setOther = new JButton("Other");
+        setOther.setFont(subFont);
+        setOther.setBorderPainted(false);
+        setOther.setContentAreaFilled(false);
 
         buttonPanel.add(setTokyo);
         buttonPanel.add(setParis);
         buttonPanel.add(setLondon);
+        buttonPanel.add(setOther);
 
         add(buttonPanel, BorderLayout.NORTH);
+
+        locationLabel = new JLabel("", JLabel.CENTER);
+        locationLabel.setFont(locationFont);
+        locationLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        add(locationLabel, BorderLayout.SOUTH);
 
         setPreferredSize(dim);
 
@@ -100,6 +104,17 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
                 updateWeatherInfo("London");
             }
         });
+
+        setOther.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String city = JOptionPane.showInputDialog(null, "Enter city name:", "Other City", JOptionPane.PLAIN_MESSAGE);
+                if (city != null && !city.isEmpty()) {
+                    updateWeatherInfo(city);
+                }
+            }
+        });
+
         startThread();
     }
 
@@ -148,6 +163,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
 
                 temperatureLabel.setText(temperature);
                 humidityLabel.setText(humidity);
+                locationLabel.setText(city);
 
                 ImageIcon icon = null;
                 switch (weather) {
