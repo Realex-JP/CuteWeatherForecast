@@ -5,7 +5,8 @@ import javax.imageio.*;
 import javax.swing.*;
 
 public final class Config {
-    final static int updateTime = 60 * 60 * 1000; // 更新する頻度（1時間）
+    final static int updateTime = 60 * 60 * 1000;
+    final static String apiKey = "";
 
     final static Color themeColor = new Color(0xC8C4FF);
 
