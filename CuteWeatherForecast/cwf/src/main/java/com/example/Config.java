@@ -5,8 +5,7 @@ import javax.imageio.*;
 import javax.swing.*;
 
 public final class Config {
-    final static int updateTime = 60 * 60 * 1000;
-    final static String apiKey = "";
+    final static int updateTime = 60 * 60 * 1000; // 更新する頻度（1時間）
 
     final static Color themeColor = new Color(0xC8C4FF);
 
@@ -15,31 +14,6 @@ public final class Config {
     final static Font mainFont = new Font("Agency FB", Font.PLAIN, 70);
     final static Font subFont = new Font("Bauhaus 93", Font.PLAIN, 20);
     final static Font locationFont = new Font("Bauhaus 93", Font.PLAIN, 40);
-
-    final static String location1 = "Tokyo";
-    final static String location2 = "Paris";
-    final static String location3 = "London";
-
-    final static JButton setLocation1 = new JButton("Tokyo");
-    final static JButton setLocation2 = new JButton("Paris");
-    final static JButton setLocation3 = new JButton("London");
-    final static JButton setOther = new JButton("Other");
-
-    static {
-        setLocation1.setFont(subFont);
-        setLocation1.setBorderPainted(false);
-        setLocation1.setContentAreaFilled(false);
-        setLocation2.setFont(subFont);
-        setLocation2.setBorderPainted(false);
-        setLocation2.setContentAreaFilled(false);
-        setLocation3.setFont(subFont);
-        setLocation3.setBorderPainted(false);
-        setLocation3.setContentAreaFilled(false);
-        setOther.setFont(subFont);
-        setLocation3.setBorderPainted(false);
-        setLocation3.setContentAreaFilled(false);
-    }
-
 
     final static ImageIcon sunny = new ImageIcon(Config.class.getResource("/sunny_2570483.png"));
     final static ImageIcon cloudy = new ImageIcon(Config.class.getResource("/cloud_2570486.png"));
