@@ -14,8 +14,6 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
     Thread fThread;
     private JLabel temperatureLabel, weatherLabel, humidityLabel, locationLabel;
 
-    private JButton setTokyo, setParis, setLondon, setOther;
-
     private Image bgImg;
 
     public CuteWeatherForecast() {
@@ -50,29 +48,9 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 60, 5));
         buttonPanel.setBackground(themeColor);
 
-        setTokyo = new JButton("Tokyo");
-        setTokyo.setFont(subFont);
-        setTokyo.setBorderPainted(false);
-        setTokyo.setContentAreaFilled(false);
-
-        setParis = new JButton("Paris");
-        setParis.setFont(subFont);
-        setParis.setBorderPainted(false);
-        setParis.setContentAreaFilled(false);
-
-        setLondon = new JButton("London");
-        setLondon.setFont(subFont);
-        setLondon.setBorderPainted(false);
-        setLondon.setContentAreaFilled(false);
-
-        setOther = new JButton("Other");
-        setOther.setFont(subFont);
-        setOther.setBorderPainted(false);
-        setOther.setContentAreaFilled(false);
-
-        buttonPanel.add(setTokyo);
-        buttonPanel.add(setParis);
-        buttonPanel.add(setLondon);
+        buttonPanel.add(setLocation1);
+        buttonPanel.add(setLocation2);
+        buttonPanel.add(setLocation3);
         buttonPanel.add(setOther);
 
         add(buttonPanel, BorderLayout.NORTH);
@@ -84,24 +62,24 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
 
         setPreferredSize(dim);
 
-        setTokyo.addActionListener(new ActionListener() {
+        setLocation1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateWeatherInfo("Tokyo");
+                updateWeatherInfo(location1);
             }
         });
 
-        setParis.addActionListener(new ActionListener() {
+        setLocation2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateWeatherInfo("Paris");
+                updateWeatherInfo(location2);
             }
         });
 
-        setLondon.addActionListener(new ActionListener() {
+        setLocation3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateWeatherInfo("London");
+                updateWeatherInfo(location3);
             }
         });
 
@@ -139,7 +117,6 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
 
     private void updateWeatherInfo(String city) {
         try {
-            String apiKey = "";
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&units=metric&appid=" + apiKey;
 
             URL url = new URL(apiUrl);
