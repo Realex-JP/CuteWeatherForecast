@@ -1,13 +1,48 @@
 package com.example;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import org.json.JSONObject;
 
-import static com.example.Config.*;
+import static com.example.Config.apiKey;
+import static com.example.Config.cloudy;
+import static com.example.Config.cloudyBg;
+import static com.example.Config.dim;
+import static com.example.Config.location1;
+import static com.example.Config.location2;
+import static com.example.Config.location3;
+import static com.example.Config.locationFont;
+import static com.example.Config.mainFont;
+import static com.example.Config.rainy;
+import static com.example.Config.rainyBg;
+import static com.example.Config.setLocation1;
+import static com.example.Config.setLocation2;
+import static com.example.Config.setLocation3;
+import static com.example.Config.setOther;
+import static com.example.Config.snowy;
+import static com.example.Config.snowyBg;
+import static com.example.Config.sunny;
+import static com.example.Config.sunnyBg;
+import static com.example.Config.themeColor;
+import static com.example.Config.updateTime;
 
 public class CuteWeatherForecast extends JPanel implements Runnable {
 
@@ -88,6 +123,7 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String city = JOptionPane.showInputDialog(null, "都市名をアルファベットで入力してください（例：Sydney）", "他の都市を選択", JOptionPane.PLAIN_MESSAGE);
                 if (city != null && !city.isEmpty()) {
+                    city = city.replace(" ", "+");
                     updateWeatherInfo(city);
                 }
             }
@@ -135,12 +171,15 @@ public class CuteWeatherForecast extends JPanel implements Runnable {
 
                 JSONObject jsonResponse = new JSONObject(content.toString());
                 String temperature = jsonResponse.getJSONObject("main").getInt("temp") + "°C";
+                String tempMax = jsonResponse.getJSONObject("main").getInt("temp_max") + "°C";
+                String tempMin = jsonResponse.getJSONObject("main").getInt("temp_min") + "°C";
                 String humidity = jsonResponse.getJSONObject("main").getInt("humidity") + "%";
                 String weather = jsonResponse.getJSONArray("weather").getJSONObject(0).getString("main");
+                String cityLabel = city.replace("+", " ") + "   " +jsonResponse.getJSONObject("sys").getString("country");
 
                 temperatureLabel.setText(temperature);
                 humidityLabel.setText(humidity);
-                locationLabel.setText(city);
+                locationLabel.setText(cityLabel);
 
                 ImageIcon icon = null;
                 switch (weather) {

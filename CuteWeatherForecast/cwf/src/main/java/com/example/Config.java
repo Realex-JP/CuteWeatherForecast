@@ -1,8 +1,13 @@
 package com.example;
 
-import java.awt.*;
-import javax.imageio.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public final class Config {
     final static int updateTime = 60 * 60 * 1000;
@@ -20,9 +25,9 @@ public final class Config {
     final static String location2 = "Paris";
     final static String location3 = "London";
 
-    final static JButton setLocation1 = new JButton("Tokyo");
-    final static JButton setLocation2 = new JButton("Paris");
-    final static JButton setLocation3 = new JButton("London");
+    final static JButton setLocation1 = new JButton(location1);
+    final static JButton setLocation2 = new JButton(location2);
+    final static JButton setLocation3 = new JButton(location3);
     final static JButton setOther = new JButton("Other");
 
     static {
