@@ -1,48 +1,15 @@
 package com.example;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import org.json.JSONObject;
 
-import static com.example.Config.apiKey;
-import static com.example.Config.cloudy;
-import static com.example.Config.cloudyBg;
-import static com.example.Config.dim;
-import static com.example.Config.location1;
-import static com.example.Config.location2;
-import static com.example.Config.location3;
-import static com.example.Config.locationFont;
-import static com.example.Config.mainFont;
-import static com.example.Config.rainy;
-import static com.example.Config.rainyBg;
-import static com.example.Config.setLocation1;
-import static com.example.Config.setLocation2;
-import static com.example.Config.setLocation3;
-import static com.example.Config.setOther;
-import static com.example.Config.snowy;
-import static com.example.Config.snowyBg;
-import static com.example.Config.sunny;
-import static com.example.Config.sunnyBg;
-import static com.example.Config.themeColor;
-import static com.example.Config.updateTime;
+import static com.example.Config.*;
 
 public class CuteWeatherForecast extends JPanel implements Runnable {
 
